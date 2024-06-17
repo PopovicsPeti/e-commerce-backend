@@ -1,0 +1,23 @@
+service: product-service
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  stage: dev
+
+functions:
+  getProductsList:
+    handler: handler.getProductsList
+    events:
+      - http:
+          path: /products
+          method: get
+          cors: true
+  getProductsById:
+    handler: handler.getProductsById
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
+          cors: true
