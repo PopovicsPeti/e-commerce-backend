@@ -72,6 +72,13 @@ When you are done developing, don't forget to run `serverless deploy` to deploy 
 
 GetProductList -> https://yc1b9wcf50.execute-api.eu-north-1.amazonaws.com/default/products
 GetProductById -> https://n6nzzwc7ok.execute-api.eu-north-1.amazonaws.com/default/getProductsbyid/94826239-97d5-4c38-91f0-dcfd72e0fe23
+CreateProduct  -> https://c4jmdpe3ab.execute-api.eu-north-1.amazonaws.com/default/product-service-dev-addProduct
+it works from postman if the body is provided with the required properties i tried with this one 
+{
+    "title": "Dixit",
+    "description": "associaton/psichology card game",
+    "price": 25
+}
 
 all products IDs can be found in the products.txt file
 
