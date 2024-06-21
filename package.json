@@ -1,12 +1,13 @@
 {
   "dependencies": {
+    "aws": "^0.0.3-2",
+    "aws-sdk": "^2.1645.0",
     "serverless": "^4.1.0"
   },
   "name": "first-task-backend",
   "description": "backend for aws cloud modul Popovics Péter",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

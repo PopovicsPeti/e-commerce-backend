@@ -2,22 +2,72 @@ service: product-service
 
 provider:
   name: aws
-  runtime: nodejs20.x
+  runtime: nodejs16.x
   region: eu-north-1
   stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:PutItem
+      Resource:
+        - !GetAtt ProductsTable.Arn
+        - !GetAtt StockTable.Arn
+  environment:
+    PRODUCTS_TABLE: !Ref ProductsTable
+    STOCK_TABLE: !Ref StockTable
 
 functions:
   getProductsList:
     handler: handler.getProductsList
     events:
       - http:
-          path: /products
+          path: products
           method: get
           cors: true
   getProductsById:
     handler: handler.getProductsById
     events:
       - http:
-          path: /products/{productId}
+          path: products/{productId}
           method: get
           cors: true
+  fillDynamoDB:
+    handler: handler.insertTestData
+    events:
+      - http:
+          path: fill-dynamodb
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    ProductsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: products_table
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+    StockTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: stock_table
+        AttributeDefinitions:
+          - AttributeName: product_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: product_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
