@@ -71,7 +71,7 @@ Now you can invoke the function as before, but this time the function will be ex
 When you are done developing, don't forget to run `serverless deploy` to deploy the function to the cloud.
 
 GetProductList -> https://yc1b9wcf50.execute-api.eu-north-1.amazonaws.com/default/products
-GetProductById -> https://n6nzzwc7ok.execute-api.eu-north-1.amazonaws.com/default/getProductsbyid/7567ec4b-b10c-48c5-9345-fc73c48a80aa
+GetProductById -> https://n6nzzwc7ok.execute-api.eu-north-1.amazonaws.com/default/getProductsbyid/94826239-97d5-4c38-91f0-dcfd72e0fe23
 
 all products IDs can be found in the products.txt file
 
