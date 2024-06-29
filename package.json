@@ -2,6 +2,7 @@
   "dependencies": {
     "aws": "^0.0.3-2",
     "aws-sdk": "^2.1645.0",
+    "csv-parser": "^3.0.0",
     "serverless": "^4.1.0"
   },
   "name": "first-task-backend",
