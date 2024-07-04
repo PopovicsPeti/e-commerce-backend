@@ -1,0 +1,18 @@
+service: authorization-service
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  basicAuthorizer:
+    handler: handler.basicAuthorizer
+    environment:
+      PopovicsPeti: ${env:PopovicsPeti}
+
+package:
+  exclude:
+    - .env
