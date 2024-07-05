@@ -5,13 +5,13 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs16.x  
 
 functions:
   basicAuthorizer:
-    handler: handler.basicAuthorizer
+    handler: basicAuthorizer.handler
     environment:
-      PopovicsPeti: ${env:PopovicsPeti}
+      PopovicsPeti: ${env:TEST_PASSWORD}  
 
 package:
   exclude:

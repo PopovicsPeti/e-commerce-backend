@@ -5,6 +5,9 @@ provider:
   runtime: nodejs16.x
   region: eu-north-1
   stage: dev
+  environment:
+    PRODUCTS_TABLE: !Ref ProductsTable
+    STOCK_TABLE: !Ref StockTable
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -15,40 +18,36 @@ provider:
       Resource:
         - !GetAtt ProductsTable.Arn
         - !GetAtt StockTable.Arn
-  environment:
-    PRODUCTS_TABLE: !Ref ProductsTable
-    STOCK_TABLE: !Ref StockTable
 
 functions:
   getProductsList:
-    handler: handler.getProductsList
+    handler: getProductsList.handler
     events:
       - http:
           path: products
           method: get
           cors: true
   getProductsById:
-    handler: handler.getProductsById
+    handler: getProductsById.handler
     events:
       - http:
           path: products/{productId}
           method: get
           cors: true
   fillDynamoDB:
-    handler: handler.insertTestData
+    handler: fillDynamoDB.handler
     events:
       - http:
           path: fill-dynamodb
           method: post
           cors: true
   createProduct:
-    handler: handler.createProduct
+    handler: createProduct.handler
     events:
       - http:
           path: products
           method: post
           cors: true
-
 
 resources:
   Resources:

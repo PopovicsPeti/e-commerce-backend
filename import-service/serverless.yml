@@ -6,6 +6,7 @@ provider:
   region: eu-north-1
   stage: dev
   httpApi:
+    cors: true
     id: h7x67x6ia8
   iamRoleStatements:
     - Effect: Allow
@@ -13,24 +14,21 @@ provider:
         - s3:GetObject
         - s3:PutObject
         - s3:ListBucket
-      Resource: "arn:aws:s3:::import-service-uploaded/*"
+      Resource: "arn:aws:s3:::product-service-dev-serverlessdeploymentbucket-zaa6fmhns43p/*"
 
 functions:
   importProductsFile:
-    handler: handler.importProductsFile
+    handler: importProductsFile.handler
     events:
       - httpApi:
           method: get
           path: /import
-          request:
-            parameters:
-              querystrings:
-                name: true 
+          cors: true
   importFileParser:
-    handler: handler.importFileParser
+    handler: importFileParser.handler
     events:
       - s3:
-          bucket: your-bucket-name
+          bucket: product-service-dev-serverlessdeploymentbucket-zaa6fmhns43p  
           event: s3:ObjectCreated:*
           rules:
             - prefix: uploaded/
